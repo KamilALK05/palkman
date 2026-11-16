@@ -105,6 +105,51 @@
     '„Brak zaliczenia ćwiczeń. Dziekanat poinformuje Pana o opłacie za powtarzanie semestru!”',
   ];
 
+  // --- Dynamiczny Silnik Pogodowy (CI/CD GitHub Actions & AccuWeather) ---
+  const weatherData = window.CAMPUS_WEATHER || {
+    condition: 'sunny',
+    temp_c: 20.0,
+    campus_alert: 'Słoneczna sesja na ALK!',
+    game_effects: {
+      theme_class: 'weather-sunny',
+      hud_badge: '☀️ 20.0°C | Słonecznie nad ALK',
+      professor_quote: 'Piękna pogoda na zaliczenie w pierwszym terminie! Złapmy trochę słońca!',
+    },
+  };
+
+  // Cząsteczki aury na Canvasie (deszcz / śnieg)
+  const weatherParticles = [];
+  if (weatherData.condition === 'rain') {
+    for (let i = 0; i < 70; i++) {
+      weatherParticles.push({
+        x: Math.random() * 800,
+        y: Math.random() * 540,
+        l: Math.random() * 10 + 6,
+        speed: Math.random() * 4 + 6,
+      });
+    }
+  } else if (weatherData.condition === 'snow') {
+    for (let i = 0; i < 50; i++) {
+      weatherParticles.push({
+        x: Math.random() * 800,
+        y: Math.random() * 540,
+        r: Math.random() * 2 + 1,
+        speed: Math.random() * 1.2 + 0.8,
+      });
+    }
+  }
+
+  // Dodanie kwestii pogodowej do cytatów profesora
+  if (weatherData.game_effects && weatherData.game_effects.professor_quote) {
+    PROF_QUOTES.push(weatherData.game_effects.professor_quote);
+  }
+
+  // Synchronizacja etykiety aury
+  const hudWeatherEl = document.getElementById('hud-weather-text');
+  if (hudWeatherEl && weatherData.game_effects && weatherData.game_effects.hud_badge) {
+    hudWeatherEl.textContent = weatherData.game_effects.hud_badge;
+  }
+
   // --- Stałe gry ---
   const CANVAS_WIDTH = 800;
   const CANVAS_HEIGHT = 540;
@@ -1032,6 +1077,42 @@
       ctx.strokeText(ft.text, ft.x, ft.y);
       ctx.fillStyle = ft.color;
       ctx.fillText(ft.text, ft.x, ft.y);
+      ctx.restore();
+    }
+
+    // 9. Cząsteczki aury pogodowej na Canvasie (deszcz / śnieg)
+    if (weatherData.condition === 'rain') {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(72, 202, 228, 0.4)';
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      for (const p of weatherParticles) {
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x - 1.5, p.y + p.l);
+        p.y += p.speed;
+        p.x -= 0.5;
+        if (p.y > CANVAS_HEIGHT) {
+          p.y = -10;
+          p.x = Math.random() * CANVAS_WIDTH;
+        }
+      }
+      ctx.stroke();
+      ctx.restore();
+    } else if (weatherData.condition === 'snow') {
+      ctx.save();
+      ctx.fillStyle = 'rgba(240, 248, 255, 0.7)';
+      ctx.beginPath();
+      for (const p of weatherParticles) {
+        ctx.moveTo(p.x, p.y);
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        p.y += p.speed;
+        p.x += Math.sin(p.y * 0.04) * 0.4;
+        if (p.y > CANVAS_HEIGHT) {
+          p.y = -5;
+          p.x = Math.random() * CANVAS_WIDTH;
+        }
+      }
+      ctx.fill();
       ctx.restore();
     }
   }

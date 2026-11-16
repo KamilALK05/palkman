@@ -20,7 +20,7 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body>
+  <body class="weather-cloudy">
     <!-- Główny kontener aplikacji -->
     <div id="app" class="game-container">
       
@@ -94,6 +94,12 @@
       <main class="canvas-viewport" role="main">
         <div class="canvas-wrapper">
           <canvas id="gameCanvas" width="800" height="540" tabindex="0" aria-label="Obszar gry 2D Kozminski Escape"></canvas>
+
+          <!-- Kompaktowa nakładka aury nad Kampusem ALK (GitHub Actions Live) -->
+          <div class="canvas-weather-pill" title="Aura na żywo z ul. Jagiellońskiej (CI/CD)">
+            <span class="weather-pulse-dot"></span>
+            <div class="hud-value" id="hud-weather-text">☁️ 7.2°C | Umiarkowane zachmurzenie</div>
+          </div>
 
           <!-- Dymek z dynamicznymi wypowiedziami profesora z czerwonym długopisem -->
           <aside id="profSpeech" class="prof-speech-bubble" aria-live="polite">
@@ -317,7 +323,8 @@
 
     </div>
 
-    <!-- 5. Poprawne podpięcie modułu dźwiękowego i silnika gry -->
+    <!-- 5. Poprawne podpięcie modułu pogodowego, dźwiękowego i silnika gry -->
+    <script src="./js/weather.js"></script>
     <script src="./js/audio.js"></script>
     <script src="./js/game.js"></script>
   </body>
