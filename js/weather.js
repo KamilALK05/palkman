@@ -1,21 +1,21 @@
-// Automatycznie wygenerowane przez potok GitHub Actions (2026-11-17 13:19 UTC)
+// Automatycznie wygenerowane przez potok GitHub Actions (2026-11-17 13:23 UTC)
 window.CAMPUS_WEATHER = {
   "city": "Warszawa (Kampus ALK, ul. Jagiellońska)",
   "source": "Symulacja manualna (Workflow Dispatch)",
-  "condition": "rain",
-  "condition_label": "Ulewny deszcz nad Kampusem ALK (Test CI/CD)",
-  "icon": "🌧️",
-  "temp_c": 9.5,
-  "humidity": 95,
-  "precipitation_mm": 5.8,
+  "condition": "snow",
+  "condition_label": "Zimowa śnieżyca na Jagiellońskiej (Test CI/CD)",
+  "icon": "❄️",
+  "temp_c": -2.0,
+  "humidity": 88,
+  "precipitation_mm": 2.2,
   "is_day": true,
-  "campus_alert": "Uwaga: Posadzka na Patio jest śliska! Profesor narzeka na zmoknięte arkusze ocen.",
+  "campus_alert": "Zimowa aura na ALK! Prószy śnieg, uważaj na zaspy przy wejściu do Budynku D.",
   "game_effects": {
-    "theme_class": "weather-rain",
-    "particles": "rain",
-    "player_friction": 0.9,
-    "professor_quote": "Brrr, w taki deszcz moje arkusze ocen zamokną! Panie Kolego, zmykajmy do auli!",
-    "hud_badge": "🌧️ 9.5°C | Ulewny deszcz nad Kampusem ALK (Test CI/CD)"
+    "theme_class": "weather-snow",
+    "particles": "snow",
+    "player_friction": 0.85,
+    "professor_quote": "Zaspy śnieżne na Jagiellońskiej, a ja muszę sprawdzić 150 egzaminów!",
+    "hud_badge": "❄️ -2.0°C | Zimowa śnieżyca na Jagiellońskiej (Test CI/CD)"
   },
-  "last_updated": "2026-11-17 13:19 UTC"
+  "last_updated": "2026-11-17 13:23 UTC"
 };
