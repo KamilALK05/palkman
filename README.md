@@ -83,21 +83,6 @@ starter_project/
 ### Uruchomienie gry w przeglądarce:
 Wystarczy otworzyć plik `index.html` w dowolnej nowoczesnej przeglądarce (lub uruchomić serwer lokalny, np. *Live Server* w VS Code).
 
-### Ręczne przetestowanie silnika pogody (CLI):
-```bash
-# 1. Pobranie bieżącej aury z internetu (Open-Meteo fallback lub AccuWeather)
-python fetch_weather.py --override auto
-
-# 2. Wymuszenie deszczu (do testu cząsteczek i motywu ciemnoniebieskiego)
-python fetch_weather.py --override rain
-
-# 3. Wymuszenie słonecznej aury
-python fetch_weather.py --override sunny
-
-# 4. Wymuszenie śnieżycy
-python fetch_weather.py --override snow
-```
-
 ---
 
 ## 🔐 5. Konfiguracja w Repozytorium GitHub
