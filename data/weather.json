@@ -1,20 +1,20 @@
 {
   "city": "Warszawa (Kampus ALK, ul. Jagiellońska)",
-  "source": "AccuWeather API",
-  "condition": "sunny",
-  "condition_label": "Częściowo słonecznie",
-  "icon": "☀️",
-  "temp_c": 7.8,
-  "humidity": 65,
-  "precipitation_mm": 0.0,
+  "source": "Symulacja manualna (Workflow Dispatch)",
+  "condition": "rain",
+  "condition_label": "Ulewny deszcz nad Kampusem ALK (Test CI/CD)",
+  "icon": "🌧️",
+  "temp_c": 9.5,
+  "humidity": 95,
+  "precipitation_mm": 5.8,
   "is_day": true,
-  "campus_alert": "Słoneczna pogoda! ECTS lśnią na Patio, a profesor w dobrym humorze chętnie stawia 5.0!",
+  "campus_alert": "Uwaga: Posadzka na Patio jest śliska! Profesor narzeka na zmoknięte arkusze ocen.",
   "game_effects": {
-    "theme_class": "weather-sunny",
-    "particles": "sunbeams",
-    "player_friction": 0.98,
-    "professor_quote": "Piękna pogoda na zaliczenie w pierwszym terminie! Złapmy trochę słońca!",
-    "hud_badge": "☀️ 7.8°C | Częściowo słonecznie"
+    "theme_class": "weather-rain",
+    "particles": "rain",
+    "player_friction": 0.9,
+    "professor_quote": "Brrr, w taki deszcz moje arkusze ocen zamokną! Panie Kolego, zmykajmy do auli!",
+    "hud_badge": "🌧️ 9.5°C | Ulewny deszcz nad Kampusem ALK (Test CI/CD)"
   },
-  "last_updated": "2026-11-17 13:17 UTC"
+  "last_updated": "2026-11-17 13:19 UTC"
 }
