@@ -1,0 +1,84 @@
+name: Kozminski Escape Live Weather Pipeline
+
+on:
+  # 1. Ręczne wyzwalanie z formularzem wyboru aury (do testów w Web UI)
+  workflow_dispatch:
+    inputs:
+      override_condition:
+        description: 'Wymuszenie aury do testów gry:'
+        required: true
+        default: 'auto'
+        type: choice
+        options:
+          - 'auto'
+          - 'rain'
+          - 'sunny'
+          - 'snow'
+          - 'night'
+
+  # 2. Automatyczne uruchomienie przy modyfikacji skryptu lub workflow
+  push:
+    branches:
+      - main
+    paths:
+      - 'fetch_weather.py'
+      - '.github/workflows/**'
+      - 'requirements.txt'
+
+  # 3. Cykliczny harmonogram Cron - automatyczny pobór co 1 godzinę
+  schedule:
+    - cron: '0 * * * *'
+
+# Uprawnienia wymagane do automatycznego zapisu commitów przez bota
+permissions:
+  contents: write
+
+jobs:
+  update-campus-weather:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Krok 1: Pobranie kodu repozytorium
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Krok 2: Konfiguracja środowiska Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Krok 3: Instalacja zależności
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: 🌦️ Krok 4: Pobranie aury z API i aktualizacja gry
+        env:
+          ACCUWEATHER_API_KEY: ${{ secrets.ACCUWEATHER_API_KEY }}
+        run: |
+          OVERRIDE="${{ inputs.override_condition || 'auto' }}"
+          echo "Uruchamianie silnika pogodowego z trybem: $OVERRIDE"
+          python fetch_weather.py --override "$OVERRIDE"
+
+      - name: 💾 Krok 5: Automatyczny commit i push zmian na produkcję
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ js/weather.js reports/ index.html
+          
+          if git diff --staged --quiet; then
+            echo "Brak zmian w aurze pogodowej. Pomijam tworzenie commita."
+          else
+            git commit -m "chore(weather): aktualizacja aury na kampusie ALK [skip ci]"
+            git push
+          fi
+
+      - name: 📦 Krok 6: Publikacja raportu jako artefakt
+        uses: actions/upload-artifact@v4
+        with:
+          name: campus-weather-report
+          path: |
+            data/weather.json
+            reports/latest_weather_report.md
+          retention-days: 7
