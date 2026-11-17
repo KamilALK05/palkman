@@ -1,4 +1,4 @@
-// Automatycznie wygenerowane przez potok GitHub Actions (2026-11-17 13:07 UTC)
+// Automatycznie wygenerowane przez potok GitHub Actions (2026-11-17 13:17 UTC)
 window.CAMPUS_WEATHER = {
   "city": "Warszawa (Kampus ALK, ul. Jagiellońska)",
   "source": "AccuWeather API",
@@ -17,5 +17,5 @@ window.CAMPUS_WEATHER = {
     "professor_quote": "Piękna pogoda na zaliczenie w pierwszym terminie! Złapmy trochę słońca!",
     "hud_badge": "☀️ 7.8°C | Częściowo słonecznie"
   },
-  "last_updated": "2026-11-17 13:07 UTC"
+  "last_updated": "2026-11-17 13:17 UTC"
 };

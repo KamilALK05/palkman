@@ -1,6 +1,6 @@
 # 🌦️ Raport Aury na Kampusie ALK – Potok GitHub Actions
 
-* **Data aktualizacji:** `2026-11-17 13:07 UTC`
+* **Data aktualizacji:** `2026-11-17 13:17 UTC`
 * **Źródło danych:** `AccuWeather API`
 * **Lokalizacja:** Warszawa, ul. Jagiellońska 57/59 (Kampus ALK)
 
